@@ -21,7 +21,7 @@ Shape = ADT do
 end
 ```
 
-Let's try an instantiate a Shape with our nullary constructor Void:
+Let's try to instantiate a Shape with our nullary constructor Void:
 
 ```ruby
 Shape::Void()
