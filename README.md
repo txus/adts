@@ -1,4 +1,4 @@
-# ADTs
+# ADTs [![Build Status](https://secure.travis-ci.org/txus/adts.png)](http://travis-ci.org/txus/adts)
 
 [Algebraic Data Types][adts] for Ruby.
 
@@ -91,12 +91,12 @@ Or install it yourself as:
 
     $ gem install adts
 
-## Contributing
+## Who's this
 
-1. Fork it ( https://github.com/[my-github-username]/adt/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+This was made by [Josep M. Bach (Txus)](http://blog.txus.io) under the MIT
+license. I am [@txustice][twitter] on twitter (where you should probably follow
+me!).
 
+[twitter]: https://twitter.com/txustice
 [adts]: http://en.wikipedia.org/wiki/Algebraic_data_type
+
