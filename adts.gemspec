@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'adt/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "adt"
+  spec.name          = "adts"
   spec.version       = ADT::VERSION
   spec.authors       = ["Josep M. Bach"]
   spec.email         = ["josep.m.bach@gmail.com"]
