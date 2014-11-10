@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ADTs by txus</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>ADTs</h1>
+        <p>Algebraic Data Types for Ruby</p>
+
+        <p class="view"><a href="https://github.com/txus/adts">View the Project on GitHub <small>txus/adts</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/txus/adts/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/txus/adts/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/txus/adts">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Let's define a Shape data type:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="nb">require</span> <span class="s1">'adts'</span>
+
+<span class="no">Shape</span> <span class="o">=</span> <span class="no">ADT</span> <span class="k">do</span>
+  <span class="no">Void</span>() <span class="o">|</span>
+  <span class="no">Square</span>(<span class="ss">width:</span> <span class="no">Fixnum</span>) <span class="o">|</span>
+  <span class="no">Rectangle</span>(<span class="ss">width:</span> <span class="no">Fixnum</span>, <span class="ss">height:</span> <span class="no">Fixnum</span>) <span class="o">|</span>
+  <span class="no">Circle</span>(<span class="ss">radius:</span> <span class="no">Fixnum</span>) {
+    <span class="k">def</span> <span class="nf">area</span>
+      <span class="no">Math</span>::<span class="no">PI</span> <span class="o">*</span> radius <span class="o">*</span> radius
+    <span class="k">end</span>
+  }
+<span class="k">end</span></pre></div>
+
+<p>Let's try to instantiate a Shape with our nullary constructor Void:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Void</span>()
+<span class="c1"># =&gt; #&lt;Shape::Void ...&gt;</span></pre></div>
+
+<p>What about a square?</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>)
+<span class="c1"># =&gt; #&lt;Shape::Square @width=23&gt;</span></pre></div>
+
+<p>Our type constructors are even <strong>type-checked</strong>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Square</span>(<span class="s2">"foo"</span>)
+<span class="c1"># raises a TypeError</span></pre></div>
+
+<p>Our ADT implements equality by type and value:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>) <span class="o">==</span> <span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>)
+<span class="c1"># =&gt; true</span>
+<span class="no">Shape</span>::<span class="no">Circle</span>(<span class="m">23</span>) <span class="o">==</span> <span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>)
+<span class="c1"># =&gt; false</span>
+<span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>) <span class="o">==</span> <span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">99</span>)
+<span class="c1"># =&gt; false</span></pre></div>
+
+<p>All its instances expose (read-only) their respective parameters:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>).width
+<span class="c1"># =&gt; 23</span></pre></div>
+
+<p>All instances are a kind of <code>Shape</code>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Square</span>(<span class="m">23</span>).is_a?(<span class="no">Shape</span>)
+<span class="c1"># =&gt; true</span></pre></div>
+
+<p>And finally, our constructors can have their own special methods, just like we
+defined <code>area</code> on <code>Circle</code>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Shape</span>::<span class="no">Circle</span>(<span class="m">1</span>).area
+<span class="c1"># =&gt; 3.141592653589793</span></pre></div>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="nb">gem</span> <span class="s1">'adts'</span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install adts
+</code></pre>
+
+<h2>
+<a id="whos-this" class="anchor" href="#whos-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who's this</h2>
+
+<p>This was made by <a href="http://blog.txus.io">Josep M. Bach (Txus)</a> under the MIT
+license. I am <a href="https://twitter.com/txustice">@txustice</a> on twitter (where you should probably follow
+me!).</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/txus">txus</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-19362711-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
