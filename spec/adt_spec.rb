@@ -1,5 +1,5 @@
 require 'rspec'
-require 'adt'
+require 'adts'
 
 Shape = ADT do
   Void() |
