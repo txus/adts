@@ -11,9 +11,9 @@ require 'adts'
 
 Shape = ADT do
   Void() |
-  Square(width: Fixnum) |
-  Rectangle(width: Fixnum, height: Fixnum) |
-  Circle(radius: Fixnum) {
+  Square(width: Numeric) |
+  Rectangle(width: Numeric, height: Numeric) |
+  Circle(radius: Numeric) {
     def area
       Math::PI * radius * radius
     end
