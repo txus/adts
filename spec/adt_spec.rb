@@ -4,7 +4,7 @@ require 'adts'
 Shape = ADT do
   Void() |
   Square(width: Fixnum) |
-  Rectangle(width: Fixnum, height: Fixnum) |
+  Rectangle(width: Numeric, height: Numeric) |
   Circle(radius: Fixnum) {
     def area
       Math::PI * radius * radius
@@ -20,6 +20,11 @@ describe ADT do
   it 'typechecks the non-nullary constructors'do
     expect { Shape::Square(23) }.to_not raise_exception
     expect { Shape::Square("foo") }.to raise_exception(TypeError)
+  end
+
+  it 'allows inherited types' do
+    expect { Shape::Rectangle(23, 45.1) }.to_not raise_exception
+    expect { Shape::Rectangle("foo", "bar") }.to raise_exception(TypeError)
   end
 
   it 'implements equality by type and value' do

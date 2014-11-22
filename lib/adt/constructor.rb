@@ -11,8 +11,10 @@ module ADT
         attr_reader #{keys.map { |n| ":#{n}" }.join(', ')}
 
         def initialize(#{keys.join(", ")})
-          types = [#{keys.join(", ")}].map(&:class)
-          raise TypeError, 'Types mismatch: given ' + types.join(', ') + ', expected #{types.join(", ")}' unless types == [#{types.join(", ")}]
+          arg_types = [#{keys.join(", ")}].map(&:class)
+          unless arg_types.zip([#{types.join(", ")}]).all? { |arg_type, type| arg_type <= type }
+            raise TypeError, 'Types mismatch: given ' + arg_types.join(', ') + ', expected #{types.join(", ")}'
+          end
           #{keys.empty? ? "" : keys.map{ |n| "@#{n}" }.join(',') + " = " + keys.join(", ")}
         end
 
