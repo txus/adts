@@ -21,6 +21,11 @@ module ADT
         def ==(other)
           other.is_a?(self.class) && #{keys.empty? ? "true" : keys.map { |key| "#{key} == other.#{key}"}.join(" && ")}
         end
+
+        def to_s
+          self.class.name.split('::').last + '(' + instance_variables.map { |i| i.to_s[1..-1] + ': ' + instance_variable_get(i).inspect }.join(', ') + ')'
+        end
+        alias inspect to_s
       "
       @parameters = parameters
       @others = []

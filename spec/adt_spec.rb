@@ -44,4 +44,9 @@ describe ADT do
   it 'uses subtyping' do
     expect(Shape::Circle(1)).to be_kind_of(Shape)
   end
+
+  it 'implements to_s and inspect' do
+    expect(Shape::Circle(1).to_s).to eq("Circle(radius: 1)")
+    expect(Shape::Rectangle(1, 2).inspect).to eq("Rectangle(width: 1, height: 2)")
+  end
 end
