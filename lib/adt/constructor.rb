@@ -4,7 +4,7 @@ module ADT
 
     def initialize(parent, name, parameters, &block)
       @name = name
-      @klass = Class.new(parent, &block)
+      @klass = Class.new(parent)
       keys = parameters.keys
       types = parameters.values
       @klass.class_eval """
@@ -27,6 +27,7 @@ module ADT
         end
         alias inspect to_s
       "
+      @klass.class_eval(&block) if block
       @parameters = parameters
       @others = []
     end
